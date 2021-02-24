@@ -5,7 +5,10 @@ SET compiler="cl"
 %compiler% 0> nul 1> nul 2> nul
 IF NOT %ERRORLEVEL%==9009 GOTO :BUILD
 
-REM call setup.bat
+IF NOT EXIST ".\tools\vs\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x86\cl.exe" (
+  echo Visual studio build tools not found. Run setup.bat
+  GOTO noop
+)
 
 SET compiler="..\tools\vs\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x86\cl.exe"
 
@@ -54,4 +57,5 @@ SET Params=%*
 FOR /f "tokens=1*" %%a in ("!Params!") do ENDLOCAL & SET %1=%%b
 EXIT /b
 
+:NOOP
 

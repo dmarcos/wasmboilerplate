@@ -1,8 +1,13 @@
 @ECHO OFF
 
-clx /? 0> NUL 1 > NUL 2> NUL
+cl /? 0> NUL 1 > NUL 2> NUL
 IF NOT %ERRORLEVEL%==9009 (
   echo Visual studio build tools found in your system. You are all set
+  GOTO noop
+)
+
+IF EXIST ".\tools\vs\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x86\cl.exe" (
+  echo Visual studio build tools already installed locally in the tools\vs directory. You are all set
   GOTO noop
 )
 
@@ -54,10 +59,12 @@ PUSHD vs
 
 SET compilerInstallDestination="%templateDir%\tools\vs"
 
-echo Installing Visual Studio Build Tools... (~2GB download, It might take a bit depending on your connection. Thanks for the patience)
+echo Installing Visual Studio Build Tools... (~4GB download, It might take a bit depending on your connection. Thanks for the patience)
+echo Make sure you click Yes in the installation prompt.
 
 REM https://stackoverflow.com/questions/62551793/how-to-automate-from-command-line-the-installation-of-a-visual-studio-build-to
-%compilerDownloadDestination% --wait --norestart --nocache --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.140 --add Microsoft.VisualStudio.Component.Windows10SDK.17763 --installPath %compilerInstallDestination%
+
+%compilerDownloadDestination% --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.140 --add Microsoft.VisualStudio.Component.Windows10SDK.17763 --installPath %compilerInstallDestination%
 
 POPD
 POPD
