@@ -47,7 +47,8 @@ if not defined DevEnvDir (
 IF NOT EXIST .\build\native mkdir .\build\native
 PUSHD build\native
 
-%compiler% ..\..\main.cpp
+echo Building native version...
+%compiler% -nologo ..\..\main.cpp
 
 POPD
 
