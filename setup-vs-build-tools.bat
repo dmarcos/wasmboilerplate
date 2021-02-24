@@ -16,7 +16,7 @@ FOR /f "delims=" %%A in ('echo %CD%') do SET templateDir=%%A
 
 IF NOT EXIST .\downloads mkdir .\downloads
 PUSHD downloads
-SET downloadURL=https://download.visualstudio.microsoft.com/download/pr/11503713/e64d79b40219aea618ce2fe10ebd5f0d/vs_BuildTools.exe
+SET downloadURL = https://download.visualstudio.microsoft.com/download/pr/11503713/e64d79b40219aea618ce2fe10ebd5f0d/vs_BuildTools.exe
 
 REM Drive letter to directory mapping.
 FOR /f "delims=" %%A in ('subst') do SET subst="%%A"
