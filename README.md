@@ -1,6 +1,16 @@
 # WebAssembly Boilerplate
-Boilerplate to build a C++ program for both native :computer: and Web :earth_africa:
 
-If Visual Studio is not installed in the system this sets up a minimal self contained C++ dev environment self contained in the directory.
+I love the portability, low level control and minimalism of the C language. The convenience, immediacy and global reach of Web publication are also unmatched in other platforms.
+
+This repo is an attempt at combining the best of both worlds.
+
+Build a C++ program for both native :computer: and Web :earth_africa: simultanously.
+
+It relies on Emscripten tool chain for WASM compilation and Visual Studio build tools for native (MacOS support coming soon)
+
+The only requirement is a Windows system with git installed. The rest is installed on demand if needed.
+
+Emscripten, Visual studio build tools and Python are automatically installed locally in the directory if not found in the system.
+
 
 
