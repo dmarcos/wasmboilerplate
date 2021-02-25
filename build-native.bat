@@ -1,5 +1,7 @@
 @echo off
 
+echo Building Native version...
+
 REM Use system compiler if there's one available
 SET compiler="cl"
 %compiler% 0> nul 1> nul 2> nul
@@ -28,9 +30,9 @@ REM Extract drive expansion from subst. X:\ => C:\Directory\Path
 FOR /f "tokens=2 delims=>" %%a in (%subst%) do (SET drivePath=%%a)
 
 REM Trim leading spaces
-call :TRIM drivePath %drivePath%
+CALL :TRIM drivePath %drivePath%
 REM append backlash
-set drivePath=%drivePath%\
+SET drivePath=%drivePath%\
 
 REM Replace Drive letter with drive expansion for current directory.
 REM Taken from https://stackoverflow.com/questions/2772456/string-replacement-in-batch-file/2772498
@@ -38,7 +40,7 @@ CALL SET templateDir=%%templateDir:%drive%=%drivePath%%%
 
 :SETVARIABLES
 
-if not defined DevEnvDir (
+IF NOT DEFINED DevEnvDir (
   call "%templateDir%\tools\vs\VC\Auxiliary\Build\vcvars32.bat"
 )
 
@@ -47,7 +49,6 @@ if not defined DevEnvDir (
 IF NOT EXIST .\build\native mkdir .\build\native
 PUSHD build\native
 
-echo Building native version...
 %compiler% -nologo ..\..\main.cpp
 
 POPD
@@ -59,4 +60,7 @@ FOR /f "tokens=1*" %%a in ("!Params!") do ENDLOCAL & SET %1=%%b
 EXIT /b
 
 :NOOP
+
+REM new line.
+echo.
 

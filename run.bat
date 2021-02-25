@@ -19,11 +19,9 @@ IF "%1"=="web" (
 )
 
 :native
-taskkill /IM build\native\main.exe 2> nul
-build\native\main.exe
+call run-native.bat
 
 :web
-taskkill /IM tools\sheret\sheret.exe 2> nul
-tools\sheret\sheret.exe -d .\build\web
+call run-web.bat
 
 :noop

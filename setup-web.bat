@@ -6,10 +6,9 @@ IF NOT EXIST .\tools\sheret\sheret.exe (
   SET serverURL=https://github.com/ethanpil/sheret/releases/download/1.21/sheret-v1.21.zip
   SET serverDownloadDestination="C:\Users\Diego Marcos\Development\wasmtemplate\tools\sheret\sheret.zip"
 
-  REM powershell "Import-Module BitsTransfer; Start-BitsTransfer '%mongooseURL%' '%mongooseDownloadDestination%'"
-  bitsadmin /transfer "Downloading Mongoose Web Server" /download /priority high %serverURL% %serverDownloadDestination%
+  CALL bitsadmin /transfer "Downloading Sheret Web Server" /download /priority normal %serverURL% %serverDownloadDestination%
   PUSHD tools\sheret
-  tar -xf sheret.zip
+  CALL tar -xf sheret.zip
   POPD
 )
 
@@ -25,10 +24,9 @@ IF EXIST .\tools\emsdk\emsdk.bat (
   GOTO :setupenv
 )
 
-IF NOT EXIST .\tools mkdir .\tools
 PUSHD tools
 
-git clone https://github.com/emscripten-core/emsdk.git
+CALL git clone https://github.com/emscripten-core/emsdk.git
 
 PUSHD emsdk
 
