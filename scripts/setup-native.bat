@@ -1,5 +1,4 @@
 @ECHO OFF
-SETLOCAL
 
 cl /? 0> NUL 1 > NUL 2> NUL
 IF NOT %ERRORLEVEL%==9009 (
@@ -48,13 +47,5 @@ CALL %compilerDownloadDestination% --quiet --wait --norestart --nocache --add Mi
 
 POPD
 POPD
-
-ENDLOCAL
-
-:TRIM
-SETLOCAL EnableDelayedExpansion
-SET Params=%*
-FOR /f "tokens=1*" %%a in ("!Params!") do ENDLOCAL & SET %1=%%b
-EXIT /b
 
 :NOOP

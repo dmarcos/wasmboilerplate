@@ -1,7 +1,19 @@
-@echo off
-SETLOCAL
+@ECHO off
 
-echo Building Native version...
+ECHO Building Native version...
+
+REM Make sure we call scripts from expected directory.
+IF NOT %0=="scripts\build-native.bat" (
+  PUSHD %~dp0
+  CD..
+)
+
+IF "%1"=="" (
+  ECHO Error. Project directory not specified.
+  ECHO.
+  ECHO Usage: build-native path\to\directory
+  GOTO :NOOP
+)
 
 REM Use system compiler if there's one available
 SET compiler="cl"
@@ -9,7 +21,7 @@ SET compiler="cl"
 IF NOT %ERRORLEVEL%==9009 GOTO :BUILD
 
 IF NOT EXIST ".\tools\vs\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x86\cl.exe" (
-  echo Visual studio build tools not found. Run setup.bat
+  ECHO Visual studio build tools not found. Run setup.bat
   GOTO NOOP
 )
 
@@ -20,26 +32,29 @@ IF NOT DEFINED DevEnvDir (
   call "%currentDir%\tools\vs\VC\Auxiliary\Build\vcvars32.bat"
 )
 
+SET compiler="%currentDir%\tools\vs\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x86\cl.exe"
+
 :BUILD
 
+PUSHD %1
 IF NOT EXIST .\build\native mkdir .\build\native
-PUSHD build\native
+CD build\native
 
-SET compiler="..\..\tools\vs\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x86\cl.exe"
+ECHO "%CD%\..\..\main.cpp"
+
 %compiler% -nologo ..\..\main.cpp
 
 POPD
 
-:TRIM
-SETLOCAL EnableDelayedExpansion
-SET Params=%*
-FOR /f "tokens=1*" %%a in ("!Params!") do ENDLOCAL & SET %1=%%b
-EXIT /b
+ECHO Native build done!
 
 :NOOP
-
-ENDLOCAL
+IF NOT %0=="scripts\build-native.bat" (
+  POPD
+)
 
 REM new line.
-echo.
+ECHO.
+
+
 

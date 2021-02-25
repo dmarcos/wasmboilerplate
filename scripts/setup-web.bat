@@ -1,5 +1,4 @@
 @ECHO OFF
-SETLOCAL
 
 CALL get-current-directory.bat
 SET currentDir=%returnValue%
@@ -46,7 +45,5 @@ CALL .\emsdk_env.bat
 
 POPD
 POPD
-
-ENDLOCAL
 
 :noop

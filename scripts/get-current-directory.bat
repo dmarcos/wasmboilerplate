@@ -30,7 +30,6 @@ ENDLOCAL & set returnvalue=%currentDir%
 GOTO END
 
 :TRIM
-SETLOCAL EnableDelayedExpansion
 SET Params=%*
 FOR /f "tokens=1*" %%a in ("!Params!") do ENDLOCAL & SET %1=%%b
 EXIT /b
