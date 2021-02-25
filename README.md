@@ -1,6 +1,6 @@
 # WebAssembly Boilerplate
 
-Build a C++ program for both native :computer: and Web :earth_africa: simultanously.
+Develop a C++ program for both native :computer: and Web :earth_africa: simultaneously.
 
 I love the portability, low level control and minimalism of the C language. The convenience, immediacy and global reach of Web publication are also unmatched in other platforms.
 
