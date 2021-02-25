@@ -28,6 +28,8 @@ IF EXIST .\tools\emsdk\emsdk.bat (
   GOTO :setupenv
 )
 
+CALL install-python.bat
+
 PUSHD tools
 
 CALL git clone https://github.com/emscripten-core/emsdk.git
