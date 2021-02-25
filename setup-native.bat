@@ -1,4 +1,5 @@
 @ECHO OFF
+SETLOCAL
 
 cl /? 0> NUL 1 > NUL 2> NUL
 IF NOT %ERRORLEVEL%==9009 (
@@ -11,43 +12,21 @@ IF EXIST ".\tools\vs\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x86\cl.exe" (
   GOTO NOOP
 )
 
-REM Current directory.
-FOR /f "delims=" %%A in ('echo %CD%') do SET templateDir=%%A
-
 IF NOT EXIST .\downloads mkdir .\downloads
-PUSHD downloads
 
-REM Drive letter to directory mapping.
-FOR /f "delims=" %%A in ('subst') do SET subst="%%A"
-
-REM Deal with driver letter to folder mappings set with subst if any.
-IF [%subst%]==[] GOTO downloadCompiler
-
-REM Extract drive letter from subst.
-SET drive=%subst:~1,3%
-
-REM Extract drive expansion from subst. X:\ => C:\Directory\Path
-FOR /f "tokens=2 delims=>" %%a in (%subst%) do (SET drivePath=%%a)
-
-REM Trim leading spaces
-CALL :TRIM drivePath %drivePath%
-REM append backlash
-SET drivePath=%drivePath%\
-
-REM Replace Drive letter with drive expansion for current directory.
-REM Taken from https://stackoverflow.com/questions/2772456/string-replacement-in-batch-file/2772498
-CALL SET templateDir=%%templateDir:%drive%=%drivePath%%%
+CALL get-current-directory.bat
+SET currentDir=%returnValue%
 
 :downloadCompiler
 
 SET downloadURL=https://download.visualstudio.microsoft.com/download/pr/11503713/e64d79b40219aea618ce2fe10ebd5f0d/vs_BuildTools.exe
-SET downloadDestination=%templateDir%\downloads
+SET downloadDestination=%currentDir%\downloads
 SET compilerDownloadDestination="%downloadDestination%\vs_BuildTools.exe"
 
 ECHO Downloading Visual Studio Build Tools...
 
 REM Download compiler from Microsoft.
-bitsadmin /transfer "Downloading Visual Studio Build Tools" /download /priority normal %downloadURL% %compilerDownloadDestination%
+CALL bitsadmin /transfer "Downloading Visual Studio Build Tools" /download /priority normal %downloadURL% %compilerDownloadDestination%
 
 POPD
 
@@ -57,7 +36,7 @@ PUSHD tools
 IF NOT EXIST .\vs mkdir .\vs
 PUSHD vs
 
-SET compilerInstallDestination="%templateDir%\tools\vs"
+SET compilerInstallDestination="%currentDir%\tools\vs"
 
 ECHO Installing Visual Studio Build Tools... (~4GB download, It might take a bit depending on your connection. Thanks for the patience)
 ECHO You might have to click Yes in the installation prompt.
@@ -68,6 +47,8 @@ CALL %compilerDownloadDestination% --quiet --wait --norestart --nocache --add Mi
 
 POPD
 POPD
+
+ENDLOCAL
 
 :TRIM
 SETLOCAL EnableDelayedExpansion

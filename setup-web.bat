@@ -1,13 +1,17 @@
 @ECHO OFF
+SETLOCAL
+
+CALL get-current-directory.bat
+SET currentDir=%returnValue%
+SET sheretDir=".\tools\sheret"
+SET serverDownloadDestination="%currentDir%\tools\sheret\sheret.zip"
+SET serverURL=https://github.com/ethanpil/sheret/releases/download/1.21/sheret-v1.21.zip
+echo %serverDownloadDestination%
 
 IF NOT EXIST .\tools\sheret\sheret.exe (
-  SET sheretDir=".\tools\sheret"
   IF NOT EXIST "%sheretDir%" mkdir "%sheretDir%"
-  SET serverURL=https://github.com/ethanpil/sheret/releases/download/1.21/sheret-v1.21.zip
-  SET serverDownloadDestination="C:\Users\Diego Marcos\Development\wasmtemplate\tools\sheret\sheret.zip"
-
   CALL bitsadmin /transfer "Downloading Sheret Web Server" /download /priority normal %serverURL% %serverDownloadDestination%
-  PUSHD tools\sheret
+  CALL PUSHD tools\sheret
   CALL tar -xf sheret.zip
   POPD
 )
@@ -40,5 +44,7 @@ CALL .\emsdk_env.bat
 
 POPD
 POPD
+
+ENDLOCAL
 
 :noop
