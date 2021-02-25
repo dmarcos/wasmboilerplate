@@ -13,9 +13,7 @@ IF NOT EXIST ".\tools\vs\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x86\cl.exe" (
   GOTO NOOP
 )
 
-SET compiler="..\..\tools\vs\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x86\cl.exe"
-
-CALL get-current-directory.bat
+CALL scripts/get-current-directory.bat
 SET currentDir=%returnValue%
 
 IF NOT DEFINED DevEnvDir (
@@ -27,6 +25,7 @@ IF NOT DEFINED DevEnvDir (
 IF NOT EXIST .\build\native mkdir .\build\native
 PUSHD build\native
 
+SET compiler="..\..\tools\vs\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x86\cl.exe"
 %compiler% -nologo ..\..\main.cpp
 
 POPD

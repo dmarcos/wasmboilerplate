@@ -14,7 +14,7 @@ IF EXIST ".\tools\vs\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x86\cl.exe" (
 
 IF NOT EXIST .\downloads mkdir .\downloads
 
-CALL get-current-directory.bat
+CALL scripts/get-current-directory.bat
 SET currentDir=%returnValue%
 
 :downloadCompiler
@@ -38,7 +38,8 @@ PUSHD vs
 
 SET compilerInstallDestination="%currentDir%\tools\vs"
 
-ECHO Installing Visual Studio Build Tools... (~4GB download, It might take a bit depending on your connection. Thanks for the patience)
+ECHO Installing Visual Studio Build Tools...
+ECHO ~4GB download, It might take a bit depending on your connection. Thanks for the patience.
 ECHO You might have to click Yes in the installation prompt.
 
 REM https://stackoverflow.com/questions/62551793/how-to-automate-from-command-line-the-installation-of-a-visual-studio-build-to

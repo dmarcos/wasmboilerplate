@@ -28,7 +28,7 @@ IF EXIST .\tools\emsdk\emsdk.bat (
   GOTO :setupenv
 )
 
-CALL install-python.bat
+CALL scripts/install-python.bat
 
 PUSHD tools
 

@@ -8,7 +8,7 @@ IF NOT %ERRORLEVEL%==9009 (
 
 IF NOT EXIST .\downloads mkdir .\downloads
 
-CALL get-current-directory.bat
+CALL scripts/get-current-directory.bat
 SET currentDir=%returnValue%
 
 SET downloadURL=https://www.python.org/ftp/python/3.9.2/python-3.9.2.exe
@@ -21,6 +21,7 @@ REM Download compiler from Microsoft.
 CALL bitsadmin /transfer "Downloading Python" /download /priority normal %downloadURL% %compilerDownloadDestination%
 
 ECHO Installing Python...
+ECHO You might have to click Yes in the installation prompt.
 
 IF NOT EXIST .\tools\python mkdir .\tools\python
 

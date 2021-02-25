@@ -12,6 +12,3 @@ It relies on Emscripten tool chain for WASM compilation and Visual Studio build 
 The only requirement is a Windows system with git. The rest is installed on demand if needed.
 
 Emscripten, Visual studio build tools and Python are automatically installed locally in the directory if not found in the system.
-
-
-
