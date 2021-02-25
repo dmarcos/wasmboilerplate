@@ -1,4 +1,5 @@
 @echo off
+SETLOCAL
 
 echo Building Native version...
 
@@ -37,6 +38,8 @@ FOR /f "tokens=1*" %%a in ("!Params!") do ENDLOCAL & SET %1=%%b
 EXIT /b
 
 :NOOP
+
+ENDLOCAL
 
 REM new line.
 echo.
