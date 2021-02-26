@@ -9,7 +9,7 @@ echo %serverDownloadDestination%
 
 IF NOT EXIST .\tools\sheret\sheret.exe (
   IF NOT EXIST "%sheretDir%" mkdir "%sheretDir%"
-  CALL bitsadmin /transfer "Downloading Sheret Web Server" /download /priority normal %serverURL% %serverDownloadDestination%
+  CALL bitsadmin /transfer "Downloading Sheret Web Server" /download /priority foreground %serverURL% %serverDownloadDestination%
   CALL PUSHD tools\sheret
   CALL tar -xf sheret.zip
   POPD

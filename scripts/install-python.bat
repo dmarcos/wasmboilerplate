@@ -18,7 +18,7 @@ SET compilerDownloadDestination="%downloadDestination%\python-3.9.2.exe"
 ECHO Downloading Python...
 
 REM Download compiler from Microsoft.
-CALL bitsadmin /transfer "Downloading Python" /download /priority normal %downloadURL% %compilerDownloadDestination%
+CALL bitsadmin /transfer "Downloading Python" /download /priority foreground %downloadURL% %compilerDownloadDestination%
 
 ECHO Installing Python...
 ECHO You might have to click Yes in the installation prompt.

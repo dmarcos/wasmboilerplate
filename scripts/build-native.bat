@@ -29,7 +29,7 @@ CALL scripts/get-current-directory.bat
 SET currentDir=%returnValue%
 
 IF NOT DEFINED DevEnvDir (
-  call "%currentDir%\tools\vs\VC\Auxiliary\Build\vcvars32.bat"
+  CALL "%currentDir%\tools\vs\VC\Auxiliary\Build\vcvars32.bat"
 )
 
 SET compiler="%currentDir%\tools\vs\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x86\cl.exe"
@@ -42,7 +42,8 @@ CD build\native
 
 ECHO "%CD%\..\..\main.cpp"
 
-%compiler% -nologo ..\..\main.cpp
+SET linkerFlags=-incremental:no -opt:ref user32.lib Gdi32.lib winmm.lib
+%compiler% -nologo ..\..\main.cpp /link %linkerFlags%
 
 POPD
 
