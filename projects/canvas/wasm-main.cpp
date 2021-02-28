@@ -2,6 +2,7 @@
 #define HEIGHT 600
 #include <emscripten/emscripten.h>
 #include <stdint.h>
+#include <cstdio>
 
 #include "types.h"
 #include "renderer.h"
@@ -19,6 +20,7 @@ extern "C" {
     buffer.Width = WIDTH;
     buffer.Height = HEIGHT;
     buffer.Pitch = WIDTH*4;
+    printf("Render\n");
     Render(&buffer);
     return data;
     // for (int y = 0; y < HEIGHT; y++) {
