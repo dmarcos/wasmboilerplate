@@ -22,8 +22,8 @@ setup
 To build and run:
 
 ```sh
-build example\hello-world
-run example\hello-world
+build projects\hello-world
+run projects\hello-world
 ```
 
 ### advance usage
@@ -31,11 +31,11 @@ run example\hello-world
 You can build and run only `native` or `web`
 
 ```sh
-build example\hello-world native
-run example\hello-world native
+build projects\hello-world native
+run projects\hello-world native
 ```
 
 ```sh
-build example\hello-world web
-run example\hello-world web
+build projects\hello-world web
+run projects\hello-world web
 ```
