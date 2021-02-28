@@ -1,7 +1,7 @@
 @ECHO OFF
 
-python /? 0> NUL 1 > NUL 2> NUL
-IF NOT %ERRORLEVEL%==9009 (
+python --version 0> NUL 1> NUL 2> NUL
+IF NOT ERRORLEVEL 1 (
   ECHO Python is already installed in your system. You are all set.
   GOTO NOOP
 )
