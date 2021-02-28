@@ -1,26 +1,32 @@
-@echo off
+@ECHO off
+
+IF NOT EXIST %1 (
+  ECHO Project directory not found.
+  ECHO USAGE: run path/to/project
+  GOTO END
+)
 
 IF "%2"=="" (
-  CALL :native %1
-  CALL :web %1
+  CALL :NATIVE %1
+  CALL :WEB %1
   GOTO :END
 )
 
 IF "%2"=="native" (
-  CALL :native %1
+  CALL :NATIVE %1
   GOTO :END
 )
 
 IF "%2"=="web" (
-  CALL :web %1
+  CALL :WEB %1
   GOTO :END
 )
 
-:native
+:NATIVE
 CALL scripts/run-native.bat %1
 EXIT /b
 
-:web
+:WEB
 CALL scripts/run-web.bat %1
 EXIT /b
 

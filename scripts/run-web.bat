@@ -7,20 +7,24 @@ IF "%1"=="" (
   GOTO :NOOP
 )
 
+IF NOT EXIST %1 (
+  ECHO Project directory not found.
+  ECHO USAGE: run-web path/to/project
+  GOTO END
+)
+
 CALL scripts/get-current-directory.bat
 SET currentDir=%returnValue%
 
-PUSHD %1
 
-IF NOT EXIST build\web (
-  ECHO WASM not found. run build.bat
+IF NOT EXIST "%1\build\web" (
+  ECHO Web version not built. run build.bat
   GOTO NOOP
 )
 
-SET sheret="%currentDir%\tools\sheret\sheret.exe"
 ECHO Running Web...
-TASKKILL /IM %sheret% 2> nul
-%sheret% -d .\build\web
+PUSHD "%1\build\web"
+CALL python -m SimpleHTTPServer
 
 :NOOP
 POPD

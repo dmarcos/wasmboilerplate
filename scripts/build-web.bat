@@ -32,7 +32,7 @@ PUSHD %1
 IF NOT EXIST .\build\web mkdir .\build\web
 CD build\web
 
-CALL emcc ..\..\main.cpp --shell-file ..\..\wasm-shell.html -o index.html
+CALL emcc ..\..\main.cpp -s EXTRA_EXPORTED_RUNTIME_METHODS=['getValue'] -s EXPORTED_RUNTIME_METHODS=['ccall'] -s EXPORTED_FUNCTIONS=['_malloc'] --shell-file ..\..\wasm-shell.html -o index.html
 
 ECHO Emscripten compilation finished. Run run.bat
 

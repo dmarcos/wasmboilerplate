@@ -7,6 +7,12 @@ IF "%1"=="" (
   GOTO :NOOP
 )
 
+IF NOT EXIST %1 (
+  ECHO Project directory not found.
+  ECHO USAGE: run-native path/to/project
+  GOTO END
+)
+
 PUSHD %1
 
 IF NOT EXIST build\native\main.exe (
