@@ -24,7 +24,13 @@ IF NOT EXIST "%1\build\web" (
 
 ECHO Running Web...
 PUSHD "%1\build\web"
-CALL python -m SimpleHTTPServer
+
+REM Python 2
+CALL python -m http.server 8000 2>NUL
+IF ERRORLEVEL 1 (
+  REM Python 3
+  CALL python -m SimpleHTTPServer
+)
 
 :NOOP
 POPD
