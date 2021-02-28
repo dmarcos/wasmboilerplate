@@ -37,13 +37,13 @@ SET compiler="%currentDir%\tools\vs\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x86\cl
 :BUILD
 
 PUSHD %1
+SET mainFile=main.cpp
+IF EXIST "win32-main.cpp" SET mainFile=win32-main.cpp
 IF NOT EXIST .\build\native mkdir .\build\native
 CD build\native
 
-ECHO "%CD%\..\..\main.cpp"
-
 SET linkerFlags=-incremental:no -opt:ref user32.lib Gdi32.lib winmm.lib
-%compiler% -nologo ..\..\main.cpp /link %linkerFlags%
+%compiler% -nologo "..\..\%mainFile%" /link %linkerFlags%
 
 POPD
 
