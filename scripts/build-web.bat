@@ -15,7 +15,7 @@ IF NOT %0=="scripts\build-web.bat" (
   CD..
 )
 
-WHERE emcc 0> NUL 1 > NUL 2> NUL
+WHERE emcc 0> NUL 1> NUL 2> NUL
 IF ERRORLEVEL 1 (
   IF EXIST .\tools\emsdk\emsdk_env.bat (
     CALL .\tools\emsdk\emsdk_env.bat
